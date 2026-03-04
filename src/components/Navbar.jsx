@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { NAV_LINKS, BRAND } from '../data/navigation';
+import { useTheme } from './ThemeContext';
 
 function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
+    const { theme, toggleTheme } = useTheme();
 
     return (
         <header className="navbar" role="banner">
@@ -39,9 +41,18 @@ function Navbar() {
                             </li>
                         ))}
                     </ul>
-                    <a href="#demo" className="btn btn--primary btn--sm navbar__cta">
-                        預約 Demo
-                    </a>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                        <button
+                            onClick={toggleTheme}
+                            aria-label="切換亮暗色主題"
+                            style={{ width: '36px', height: '36px', overflow: 'hidden', padding: 0, background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: '50%', cursor: 'pointer', fontSize: '1.25rem', color: 'var(--color-text)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                        >
+                            {theme === 'dark' ? '☀️' : '🌙'}
+                        </button>
+                        <a href="#demo" className="btn btn--primary btn--sm navbar__cta">
+                            預約 Demo
+                        </a>
+                    </div>
                 </nav>
             </div>
         </header>
